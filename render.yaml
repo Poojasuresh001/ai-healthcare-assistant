@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: synthetic-healthcare-assistant
+    runtime: python
+    plan: free
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.11
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GEMINI_CHAT_MODEL
+        value: gemini-3.8-flash
+      - key: AUTO_INGEST_ON_STARTUP
+        value: "true"
+      - key: CHROMA_DIRECTORY
+        value: /tmp/chroma_db
+      - key: DATABASE_PATH
+        value: /tmp/data/synthetic_healthcare.sqlite3

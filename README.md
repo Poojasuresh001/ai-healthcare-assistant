@@ -144,6 +144,20 @@ docker compose up --build
 
 The API is available at `http://127.0.0.1:8000`. Compose stores the local Chroma files and SQLite database in named Docker volumes. Use `docker compose down` to stop the service; use `docker compose down --volumes` only when you intentionally want to remove the local indexed data and synthetic database.
 
+## Free hosted demo (Render)
+
+The repository includes `render.yaml` for a free Render web service. It serves the same browser chat at `/`, the API explorer at `/docs`, and a health check at `/health`. Render's free web services sleep after 15 minutes without traffic and lose local files when they sleep, restart, or redeploy. This app therefore rebuilds its Chroma index from the synthetic Markdown documents at startup when `AUTO_INGEST_ON_STARTUP=true`. A cold start can take longer and uses Gemini embedding quota again. The synthetic SQLite database is recreated automatically by the application when needed.
+
+To deploy:
+
+1. Push this repository and the `render.yaml` file to GitHub.
+2. In Render, choose **New > Blueprint**, connect the GitHub repository, and select the branch containing `render.yaml`.
+3. When Render asks for `GOOGLE_API_KEY`, enter your Gemini API key in Render's dashboard prompt. Never add it to `render.yaml` or GitHub.
+4. Keep the service plan set to **Free**, then create the Blueprint and wait for the deploy to finish.
+5. Open the service's `onrender.com` URL to use the chat. The first visit after it has slept may take about a minute while Render starts the service.
+
+Use only the synthetic project data in this public demo. Render documents its free services as suitable for hobby projects and testing, not production; they have resource and usage limits. Gemini API free-tier quotas also apply, and startup re-indexing consumes embedding quota after the local files are cleared. Review current [Render free-service limits](https://render.com/docs/free) and [Gemini API pricing and quotas](https://ai.google.dev/gemini-api/docs/pricing) before deploying.
+
 ## GitHub and Azure DevOps
 
 The GitHub Actions workflow `.github/workflows/ci.yml` validates the synthetic documents and runs the test suite on pushes and pull requests to `main`.
@@ -160,7 +174,7 @@ For GitHub, initialize a local repository if needed, create an empty GitHub repo
 - The application uses read-only query functions with parameter validation and SQL parameters. It does not allow arbitrary SQL execution or claim/coverage decisions.
 - LangGraph uses an in-memory checkpointer for this learning build. Session context is lost when the API process stops; the prompt uses only a short recent history window.
 - Routing is deterministic and transparent: a synthetic ID or structured-data cue selects SQL; policy and procedure language selects RAG; a question with both selects both. Expand and evaluate the routing rules when adding new question types.
-- Gemini API calls require a local API key and may be subject to the account's current model access, quotas, and billing.
+- Gemini API calls require a key configured locally or in the host's secret settings and may be subject to the account's current model access, quotas, and billing.
 - The Azure pipeline is configuration only; it has not been connected to an Azure subscription or deployed from this repository.
 
 ## Resume bullets
