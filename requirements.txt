@@ -1,0 +1,9 @@
+# LangChain's current Google GenAI integration, including Gemini embeddings.
+langchain-google-genai==4.4.0
+python-dotenv>=1.0,<2
+chromadb>=1.0,<2
+langchain-chroma>=1.0,<2
+langgraph>=1.0,<2
+fastapi>=0.115,<1
+pydantic>=2.8,<3
+uvicorn[standard]>=0.30,<1

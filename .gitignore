@@ -1,0 +1,25 @@
+# Python bytecode and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local secrets and runtime data
+.env
+.env.*
+!.env.example
+chroma_db/
+data/
+reports/
+*.sqlite3
+
+# Tooling and editor files
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store

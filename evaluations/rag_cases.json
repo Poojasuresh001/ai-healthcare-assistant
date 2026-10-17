@@ -1,0 +1,44 @@
+[
+  {
+    "question": "What is the renewal process for an existing group?",
+    "expected_source_type": ["document"],
+    "expected_source_contains": "Group Renewal Guide",
+    "document_type": "renewal_procedure"
+  },
+  {
+    "question": "What documents are required for group renewal?",
+    "expected_source_type": ["document"],
+    "expected_source_contains": "Group Renewal Guide",
+    "document_type": "renewal_procedure"
+  },
+  {
+    "question": "Why was group ABC123 not renewed?",
+    "expected_source_type": ["database"],
+    "expected_source_contains": "Synthetic renewal record",
+    "document_type": null
+  },
+  {
+    "question": "What is the plan effective date for group ABC123?",
+    "expected_source_type": ["database"],
+    "expected_source_contains": "Synthetic group and plans",
+    "document_type": null
+  },
+  {
+    "question": "Show me the claims information for member M1001.",
+    "expected_source_type": ["database"],
+    "expected_source_contains": "Synthetic claims",
+    "document_type": null
+  },
+  {
+    "question": "According to the renewal policy, what should happen when the effective date does not match?",
+    "expected_source_type": ["document"],
+    "expected_source_contains": "Group Renewal Guide",
+    "document_type": "renewal_procedure"
+  },
+  {
+    "question": "According to the renewal policy, why is group ABC123 on hold?",
+    "expected_source_type": ["document", "database"],
+    "expected_source_contains": "Group Renewal Guide",
+    "document_type": "renewal_procedure"
+  }
+]

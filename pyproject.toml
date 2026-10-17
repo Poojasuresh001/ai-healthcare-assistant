@@ -1,0 +1,9 @@
+[project]
+name = "enterprise-healthcare-insurance-assistant"
+version = "0.1.0"
+description = "A learning project for a synthetic healthcare-insurance knowledge assistant."
+requires-python = ">=3.11,<3.13"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

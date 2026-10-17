@@ -1,0 +1,19 @@
+services:
+  assistant:
+    build: .
+    env_file:
+      - .env
+    environment:
+      CHROMA_DIRECTORY: /app/chroma_db
+      DATABASE_PATH: /app/data/synthetic_healthcare.sqlite3
+      GEMINI_CHAT_MODEL: ${GEMINI_CHAT_MODEL:-gemini-3.8-flash}
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/app/chroma_db
+      - database_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  chroma_data:
+  database_data:
