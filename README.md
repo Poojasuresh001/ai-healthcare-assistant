@@ -46,6 +46,7 @@ app/
   routes/       chat and ingestion endpoints
   services/     Gemini and application factories
   tools/        allowlisted database tools
+  static/       browser chat interface
 documents/      five fictional Markdown references
 evaluations/    synthetic RAG evaluation questions
 scripts/        setup, validation, and evaluation commands
@@ -91,7 +92,7 @@ This sends the synthetic document chunks to Gemini for embeddings and saves them
 python -m uvicorn app.main:app --reload
 ```
 
-Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to try the documented API. The service exposes:
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) for the browser chat interface, or [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to try the API directly. The service exposes:
 
 | Endpoint | Purpose |
 | --- | --- |
